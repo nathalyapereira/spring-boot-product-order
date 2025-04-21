@@ -1,6 +1,7 @@
 package com.example.estudosiniciais.estudos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,20 @@ public class ProductService {
 
     public List<Product> findAll() {
         return repository.findAll();
+    }
+
+    public Product update(Long id, Product product ){
+        Optional<Product> optionalProduct = repository.findById(id);
+
+        if (optionalProduct.isEmpty()) {
+            throw new RuntimeException("Product not found");
+        }
+        
+        Product updateProduct  = optionalProduct.get();
+        updateProduct.setNome(product.getNome());
+        updateProduct.setDescricao(product.getDescricao());
+        updateProduct.setPreco(product.getPreco());
+        return repository.save(updateProduct);
     }
 
     public void delete(Long id){
