@@ -9,7 +9,8 @@ public class ProductPriceException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
-    public ProductPriceException() {
+    public ProductPriceException(String message) {
+        super(message);
     }
 
 }
